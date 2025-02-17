@@ -25,7 +25,7 @@
                                     name="title"
                                     class="form-control rounded-pill"
                                     placeholder="أدخل عنوان الملاحظة"
-                                    value="{{ $note->title }}"
+                                    value="{{ old('title', $note->title) }}"
                                     required>
                             </div>
 
@@ -37,15 +37,27 @@
                                     rows="5"
                                     class="form-control rounded"
                                     placeholder="أدخل تفاصيل الملاحظة"
-                                    required>{{ $note->note }}</textarea>
+                                    required>{{ old('note', $note->note) }}</textarea>
                             </div>
 
                             <div class="form-group mb-3">
-                                <label for="noteImage" class="form-label text-warning">📸 إضافة صورة (اجباري)</label>
+                                <label for="noteImage" class="form-label text-warning">📸 إضافة صورة (اختياري)</label>
                                 <input
                                     type="file"
-                                    name="images[]" multiple
+                                    name="images[]"
+                                    multiple
                                     class="form-control rounded-pill">
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label for="noteTags" class="form-label text-warning">الوسوم</label>
+                                <input
+                                    type="text"
+                                    id="noteTags"
+                                    name="tags"
+                                    class="form-control rounded-pill"
+                                    placeholder="أدخل الوسوم (فصل بين الوسوم باستخدام الفواصل)"
+                                    value="{{ old('tags', implode(', ', $note->tags->pluck('name')->toArray())) }}">
                             </div>
 
                             <div class="d-grid">

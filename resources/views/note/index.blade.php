@@ -6,11 +6,22 @@
             <p class="text-muted">احتفظ بأفكارك وملاحظاتك في مكان واحد</p>
         </header>
 
+        <!-- نموذج البحث باستخدام الوسوم -->
+        <form action="{{ route('note.searchByTag') }}" method="GET" class="mb-3">
+            <input type="text" name="tag" class="form-control rounded-pill" placeholder="ابحث باستخدام الوسوم">
+            <button type="submit" class="btn btn-primary mt-2">🔍 بحث</button>
+        </form>
+
+        <!-- عرض الملاحظات -->
+        @if(session('error'))
+            <div class="alert alert-danger">{{ session('error') }}</div>
+        @endif
+
         <div class="row">
             @foreach ($notes as $note)
                 <div class="col-md-4 mb-4">
-                    <div class="card shadow-lg border-0 rounded-lg note-card">
-                        <div class="card-header text-white text-center">
+                    <div class="card shadow-lg border-0 rounded-lg note-card" style="border-left: 5px solid {{ $note->color }};">
+                        <div class="card-header text-white text-center" style="background: {{ $note->color }};">
                             <h5 class="card-title mb-0">{{ $note->title }}</h5>
                         </div>
                         <div class="card-body p-4">
@@ -46,21 +57,12 @@
         /* تصميم البطاقات */
         .note-card {
             background-color: #fffbe6;
-            border-left: 5px solid #ffcc00;
             transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
         }
 
         .note-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .card-header {
-            background: #ffcc00;
-            color: #333;
-            font-weight: bold;
-            border-top-left-radius: 10px;
-            border-top-right-radius: 10px;
         }
 
         .note-text {

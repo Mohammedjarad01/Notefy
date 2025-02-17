@@ -12,14 +12,20 @@ class Note extends Model
     protected $fillable = [
         'title',
         'note',
+        'color',
         'user_id',
         'images',
-
     ];
+
     protected $casts = [
-    'images'=> 'array',
+        'images' => 'array',
     ];
 
-
-
+    /**
+     * تعريف العلاقة مع الوسوم (Tags)
+     */
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
 }

@@ -16,6 +16,7 @@
                         <form action="{{ route('note.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
 
+                            <!-- حقل عنوان الملاحظة -->
                             <div class="form-group mb-3">
                                 <label for="noteTitle" class="form-label text-warning">عنوان الملاحظة</label>
                                 <input
@@ -27,6 +28,7 @@
                                     required>
                             </div>
 
+                            <!-- حقل تفاصيل الملاحظة -->
                             <div class="form-group mb-3">
                                 <label for="noteBody" class="form-label text-warning">تفاصيل الملاحظة</label>
                                 <textarea
@@ -38,16 +40,41 @@
                                     required></textarea>
                             </div>
 
+                            <!-- اختيار اللون -->
                             <div class="form-group mb-3">
-                                <label for="noteImage" class="form-label text-warning">📸 إضافة صورة (اجباري)</label>
+                                <label for="noteColor" class="form-label text-warning">🎨 اختر لون الملاحظة</label>
+                                <input
+                                    type="color"
+                                    id="noteColor"
+                                    name="color"
+                                    class="form-control form-control-color rounded-pill"
+                                    value="#ffcc00">
+                            </div>
+
+                            <!-- حقل الصورة -->
+                            <div class="form-group mb-3">
+                                <label for="noteImage" class="form-label text-warning">📸 إضافة صورة (اختياري)</label>
                                 <input
                                     type="file"
-                                    name="images[]" multiple
+                                    name="images[]"
+                                    multiple
                                     class="form-control rounded-pill">
+                            </div>
+
+                            <!-- حقل الوسوم -->
+                            <div class="form-group mb-3">
+                                <label for="noteTags" class="form-label text-warning">الوسوم</label>
+                                <input
+                                    type="text"
+                                    id="noteTags"
+                                    name="tags"
+                                    class="form-control rounded-pill"
+                                    placeholder="أدخل الوسوم (فصل بين الوسوم باستخدام الفواصل)">
                             </div>
 
                             <input hidden name="user_id" value="1">
 
+                            <!-- زر الإضافة -->
                             <div class="d-grid">
                                 <button type="submit" class="btn btn-warning rounded-pill fw-bold">
                                     <i class="fas fa-save"></i> إضافة الملاحظة
@@ -107,6 +134,16 @@
 
         .form-label {
             font-weight: bold;
+        }
+
+        /* تنسيق اختيار اللون */
+        .form-control-color {
+            width: 100%;
+            height: 40px;
+            border: 2px solid #ffcc00;
+            border-radius: 10px;
+            padding: 5px;
+            cursor: pointer;
         }
     </style>
 </x-bootlayout>
